@@ -68,12 +68,19 @@ const WeatherCard = () => {
 
   const formatTime = (timeString: string) => {
     const date = new Date(timeString);
+
+    // 检查日期是否有效
+    if (isNaN(date.getTime())) {
+      return '时间未知';
+    }
+
     return date.toLocaleString('zh-CN', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
+      timeZone: 'Asia/Shanghai'
     });
   };
 
