@@ -1,8 +1,13 @@
 import { AccuWeatherLocation, AccuWeatherCurrent, AccuWeatherInfo } from '../types/accuWeather';
 
 // AccuWeather API 配置
-const ACCUWEATHER_API_KEY = process.env.NEXT_PUBLIC_ACCUWEATHER_API_KEY || 'YOUR_API_KEY_HERE';
-const ACCUWEATHER_BASE_URL = 'http://dataservice.accuweather.com';
+const ACCUWEATHER_API_KEY = process.env.NEXT_PUBLIC_ACCUWEATHER_API_KEY;
+const ACCUWEATHER_BASE_URL = 'https://dataservice.accuweather.com';
+
+// 检查 API 密钥
+if (!ACCUWEATHER_API_KEY || ACCUWEATHER_API_KEY === 'YOUR_API_KEY_HERE') {
+  console.error('AccuWeather API key is not configured. Please set NEXT_PUBLIC_ACCUWEATHER_API_KEY environment variable.');
+}
 
 // 预定义的城市列表（使用 AccuWeather 的城市 Key）
 const cities: Array<{ name: string; key: string; country: string }> = [
@@ -76,6 +81,10 @@ export const getRandomCity = () => {
 };
 
 export const searchCity = async (query: string): Promise<AccuWeatherLocation[]> => {
+  if (!ACCUWEATHER_API_KEY) {
+    throw new Error('AccuWeather API key is not configured');
+  }
+
   try {
     const response = await fetch(
       `${ACCUWEATHER_BASE_URL}/locations/v1/cities/search?apikey=${ACCUWEATHER_API_KEY}&q=${encodeURIComponent(query)}&language=zh-cn`
@@ -94,6 +103,10 @@ export const searchCity = async (query: string): Promise<AccuWeatherLocation[]> 
 };
 
 export const getCurrentConditions = async (locationKey: string): Promise<AccuWeatherCurrent> => {
+  if (!ACCUWEATHER_API_KEY) {
+    throw new Error('AccuWeather API key is not configured');
+  }
+
   try {
     const response = await fetch(
       `${ACCUWEATHER_BASE_URL}/currentconditions/v1/${locationKey}?apikey=${ACCUWEATHER_API_KEY}&language=zh-cn&details=true`
@@ -112,6 +125,10 @@ export const getCurrentConditions = async (locationKey: string): Promise<AccuWea
 };
 
 export const getLocationByKey = async (locationKey: string): Promise<AccuWeatherLocation> => {
+  if (!ACCUWEATHER_API_KEY) {
+    throw new Error('AccuWeather API key is not configured');
+  }
+
   try {
     const response = await fetch(
       `${ACCUWEATHER_BASE_URL}/locations/v1/${locationKey}?apikey=${ACCUWEATHER_API_KEY}&language=zh-cn`

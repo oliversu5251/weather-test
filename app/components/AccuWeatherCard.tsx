@@ -33,7 +33,12 @@ const AccuWeatherCard = () => {
 
 
     } catch (err) {
-      setError('获取天气信息失败，请重试');
+      const errorMessage = err instanceof Error ? err.message : '获取天气信息失败，请重试';
+      if (errorMessage.includes('API key is not configured')) {
+        setError('AccuWeather API 密钥未配置，请联系管理员');
+      } else {
+        setError('获取天气信息失败，请重试');
+      }
       console.error('AccuWeather fetch error:', err);
     } finally {
       clearInterval(progressInterval);
@@ -67,7 +72,12 @@ const AccuWeatherCard = () => {
       const data = await fetchAccuWeatherData(locationKey);
       setWeatherInfo(data);
     } catch (err) {
-      setError('获取城市天气信息失败，请重试');
+      const errorMessage = err instanceof Error ? err.message : '获取城市天气信息失败，请重试';
+      if (errorMessage.includes('API key is not configured')) {
+        setError('AccuWeather API 密钥未配置，请联系管理员');
+      } else {
+        setError('获取城市天气信息失败，请重试');
+      }
       console.error('City weather fetch error:', err);
     } finally {
       setLoading(false);
