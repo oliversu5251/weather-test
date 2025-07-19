@@ -11,7 +11,6 @@ const WeatherCard = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   const handleRefresh = useCallback(async () => {
-    const startTime = performance.now();
     setLoading(true);
     setError(null);
     setLoadingProgress(0);
@@ -29,11 +28,7 @@ const WeatherCard = () => {
       setWeatherInfo(data);
       setLoadingProgress(100);
 
-      // 记录加载时间
-      const loadTime = performance.now() - startTime;
-      if (window.addLoadTime) {
-        window.addLoadTime(loadTime);
-      }
+
     } catch (err) {
       setError('获取天气信息失败，请重试');
       console.error('Weather fetch error:', err);

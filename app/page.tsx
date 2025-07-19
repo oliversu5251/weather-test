@@ -1,5 +1,4 @@
 import WeatherCard from './components/WeatherCard';
-import PerformanceMonitor from './components/PerformanceMonitor';
 import Link from 'next/link';
 
 export default function Home() {
@@ -33,7 +32,6 @@ export default function Home() {
       {/* 主内容 */}
       <div className="pt-16">
         <WeatherCard />
-        <PerformanceMonitor />
       </div>
     </>
   );

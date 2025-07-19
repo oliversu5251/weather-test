@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { AccuWeatherInfo } from '../types/accuWeather';
+import { AccuWeatherInfo, AccuWeatherLocation } from '../types/accuWeather';
 import { getRandomAccuWeather, searchCity, fetchAccuWeatherData, weatherIcons } from '../services/accuWeatherService';
 
 const AccuWeatherCard = () => {
@@ -10,11 +10,10 @@ const AccuWeatherCard = () => {
   const [error, setError] = useState<string | null>(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<AccuWeatherLocation[]>([]);
   const [showSearch, setShowSearch] = useState(false);
 
   const handleRefresh = useCallback(async () => {
-    const startTime = performance.now();
     setLoading(true);
     setError(null);
     setLoadingProgress(0);
@@ -32,11 +31,7 @@ const AccuWeatherCard = () => {
       setWeatherInfo(data);
       setLoadingProgress(100);
 
-      // 记录加载时间
-      const loadTime = performance.now() - startTime;
-      if (window.addLoadTime) {
-        window.addLoadTime(loadTime);
-      }
+
     } catch (err) {
       setError('获取天气信息失败，请重试');
       console.error('AccuWeather fetch error:', err);

@@ -1,5 +1,4 @@
 import AccuWeatherCard from '../components/AccuWeatherCard';
-import PerformanceMonitor from '../components/PerformanceMonitor';
 import Link from 'next/link';
 
 export default function AccuWeatherPage() {
@@ -33,7 +32,6 @@ export default function AccuWeatherPage() {
       {/* 主内容 */}
       <div className="pt-16">
         <AccuWeatherCard />
-        <PerformanceMonitor />
       </div>
     </>
   );
