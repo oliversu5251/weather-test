@@ -1,8 +1,8 @@
-import WeatherCard from './components/WeatherCard';
-import PerformanceMonitor from './components/PerformanceMonitor';
+import AccuWeatherCard from '../components/AccuWeatherCard';
+import PerformanceMonitor from '../components/PerformanceMonitor';
 import Link from 'next/link';
 
-export default function Home() {
+export default function AccuWeatherPage() {
   return (
     <>
       {/* 导航栏 */}
@@ -15,13 +15,13 @@ export default function Home() {
             <div className="flex space-x-4">
               <Link
                 href="/"
-                className="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
               >
                 Open-Meteo
               </Link>
               <Link
                 href="/accuweather"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                className="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
               >
                 AccuWeather
               </Link>
@@ -32,7 +32,7 @@ export default function Home() {
 
       {/* 主内容 */}
       <div className="pt-16">
-        <WeatherCard />
+        <AccuWeatherCard />
         <PerformanceMonitor />
       </div>
     </>
